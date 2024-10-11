@@ -60,7 +60,7 @@ spec:
         machineConfigRef:
           apiVersion: elemental.cattle.io/v1beta1
           kind: MachineInventorySelectorTemplate
-          name: master-selector
+          name: worker-selector
         name: worker-pool
         quantity: 1
         unhealthyNodeTimeout: 0s
