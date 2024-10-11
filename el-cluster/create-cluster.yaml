@@ -1,0 +1,72 @@
+apiVersion: elemental.cattle.io/v1beta1
+kind: MachineInventorySelectorTemplate
+metadata:
+  name: master-selector
+  namespace: fleet-default
+spec:
+  template:
+    spec:
+      selector:
+        matchExpressions:
+          - key: site
+            operator: In
+            values: [ 'test' ]
+          - key: noderole
+            operator: In
+            values: [ 'master' ]
+---
+apiVersion: elemental.cattle.io/v1beta1
+kind: MachineInventorySelectorTemplate
+metadata:
+  name: worker-selector
+  namespace: fleet-default
+spec:
+  template:
+    spec:
+      selector:
+        matchExpressions:
+          - key: site
+            operator: In
+            values: [ 'test' ]
+          - key: noderole
+            operator: In
+            values: [ 'worker' ]
+---
+kind: Cluster
+apiVersion: provisioning.cattle.io/v1
+metadata:
+  name: test-el-cluster
+  namespace: fleet-default
+  labels:
+    site: test
+spec:
+  rkeConfig:
+    machineGlobalConfig:
+      etcd-expose-metrics: false
+      profile: null
+    machinePools:
+      - controlPlaneRole: true
+        etcdRole: true
+        machineConfigRef:
+          apiVersion: elemental.cattle.io/v1beta1
+          kind: MachineInventorySelectorTemplate
+          name: master-selector
+        name: master-pool
+        quantity: 1
+        unhealthyNodeTimeout: 0s
+        workerRole: true
+      - controlPlaneRole: false
+        etcdRole: false
+        machineConfigRef:
+          apiVersion: elemental.cattle.io/v1beta1
+          kind: MachineInventorySelectorTemplate
+          name: master-selector
+        name: worker-pool
+        quantity: 1
+        unhealthyNodeTimeout: 0s
+        workerRole: true
+    machineSelectorConfig:
+      - config:
+          protect-kernel-defaults: false
+    registries: {}
+  kubernetesVersion: v1.30.5+k3s1
