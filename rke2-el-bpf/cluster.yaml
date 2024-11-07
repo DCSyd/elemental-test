@@ -49,7 +49,7 @@ spec:
         namespace: tigera-operator
       data:
         KUBERNETES_SERVICE_HOST: 192.168.101.2
-        KUBERNETES_SERVICE_PORT: 6443
+        KUBERNETES_SERVICE_PORT: "6443"
     chartValues:
       rke2-calico:
         felixConfiguration:
