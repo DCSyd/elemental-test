@@ -1,0 +1,90 @@
+apiVersion: elemental.cattle.io/v1beta1
+kind: MachineInventorySelectorTemplate
+metadata:
+  name: master-selector-rke2
+  namespace: fleet-default
+spec:
+  template:
+    spec:
+      selector:
+        matchExpressions:
+          - key: site
+            operator: In
+            values: [ 'test2' ]
+          - key: noderole
+            operator: In
+            values: [ 'master' ]
+---
+apiVersion: elemental.cattle.io/v1beta1
+kind: MachineInventorySelectorTemplate
+metadata:
+  name: worker-selector-rke2
+  namespace: fleet-default
+spec:
+  template:
+    spec:
+      selector:
+        matchExpressions:
+          - key: site
+            operator: In
+            values: [ 'test2' ]
+          - key: noderole
+            operator: In
+            values: [ 'worker' ]
+---
+kind: Cluster
+apiVersion: provisioning.cattle.io/v1
+metadata:
+  name: rke2-el-cluster
+  namespace: fleet-default
+  labels:
+    site: test
+spec:
+  rkeConfig:
+    additionalManifest: |-
+      kind: ConfigMap
+      apiVersion: v1
+      metadata:
+        name: kubernetes-services-endpoint
+        namespace: tigera-operator
+      data:
+        KUBERNETES_SERVICE_HOST: 192.168.101.2
+        KUBERNETES_SERVICE_PORT: 6443
+    chartValues:
+      rke2-calico:
+        felixConfiguration:
+          bpfEnabled: true
+        installation:
+          calicoNetwork:
+            linuxDataplane: BPF
+          cni: calico
+    machineGlobalConfig:
+      cni: calico
+      disable-kube-proxy: true
+      etcd-expose-metrics: false
+    machinePools:
+      - controlPlaneRole: true
+        etcdRole: true
+        machineConfigRef:
+          apiVersion: elemental.cattle.io/v1beta1
+          kind: MachineInventorySelectorTemplate
+          name: master-selector-rke2
+        name: master-pool-rke2
+        quantity: 1
+        unhealthyNodeTimeout: 0s
+        workerRole: true
+      - controlPlaneRole: false
+        etcdRole: false
+        machineConfigRef:
+          apiVersion: elemental.cattle.io/v1beta1
+          kind: MachineInventorySelectorTemplate
+          name: worker-selector-rke2
+        name: worker-pool-rke2
+        quantity: 1
+        unhealthyNodeTimeout: 0s
+        workerRole: true
+    machineSelectorConfig:
+      - config:
+          protect-kernel-defaults: false
+    registries: {}
+  kubernetesVersion: v1.30.5+rke2r1
