@@ -42,8 +42,8 @@ metadata:
 spec:
   rkeConfig:
     machineGlobalConfig:
-      disable:
-        - servicelb
+#      disable:
+#        - servicelb
       etcd-expose-metrics: false
       profile: null
     machinePools:
@@ -71,4 +71,4 @@ spec:
       - config:
           protect-kernel-defaults: false
     registries: {}
-  kubernetesVersion: v1.30.4+k3s1
+  kubernetesVersion: v1.31.4+k3s1
