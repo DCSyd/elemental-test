@@ -43,7 +43,14 @@ subjects:
 - kind: ServiceAccount
   name: kube-vip
   namespace: kube-system
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubevip
+  namespace: kube-system
+data:
+  cidr-default: 192.168.8.30/31
 ---
 apiVersion: apps/v1
 kind: DaemonSet
