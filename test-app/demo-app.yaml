@@ -83,4 +83,5 @@ spec:
   selector:
     workload.user.cattle.io/workloadselector: apps.deployment-default-demo-app
   type: LoadBalancer
+  loadBalancerIP: 192.168.8.30
           
