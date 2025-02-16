@@ -42,8 +42,8 @@ metadata:
 spec:
   rkeConfig:
     machineGlobalConfig:
-      disable:
-        - servicelb
+#      disable:
+#        - servicelb
       etcd-expose-metrics: false
       profile: null
     machinePools:
