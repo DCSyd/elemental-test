@@ -1,6 +1,6 @@
 defaultNamespace: metallb-system
 helm:
   releaseName: metallb
-  repo: oci://registry.suse.com/edge/3.2/metallb-chart 
+  repo: https://metallb.github.io/metallb
   chart: metallb
 
