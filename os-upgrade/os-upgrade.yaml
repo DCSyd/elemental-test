@@ -3,10 +3,10 @@ kind: ManagedOSImage
 metadata:
   labels:
     elemental.cattle.io/managed-os-version-name: baremetal-v2.1.3-4.37-os
-  name: os-upgrade
+  name: os-upgrade-test
   namespace: fleet-default
 spec:
-  clusterTargets: []
+  clusterTargets: test-el-cluster
   drain:
     deleteLocalData: true
     force: true
