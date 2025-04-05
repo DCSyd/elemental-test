@@ -11,4 +11,4 @@ spec:
     force: true
     ignoreDaemonSets: true
     skipWaitForDeleteTimeout: 60
-  managedOSVersion: baremetal-v2.1.3-4.37-os
+  managedOSVersionName: baremetal-v2.1.3-4.37-os
