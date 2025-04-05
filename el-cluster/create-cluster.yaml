@@ -44,6 +44,7 @@ spec:
     machineGlobalConfig:
       disable:
         - servicelb
+        - traefik
       etcd-expose-metrics: false
       profile: null
     machinePools:
