@@ -4,8 +4,8 @@ metadata:
   name: os-upgrade-test
   namespace: fleet-default
 spec:
-#  clusterTargets: 
-#    - clusterName: test-el-cluster
+  clusterTargets: 
+    - clusterName: test-el-cluster
   drain:
     deleteLocalData: true
     force: true
