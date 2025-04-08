@@ -5,7 +5,7 @@ metadata:
   namespace: fleet-default
 spec:
   clusterTargets: 
-    - clusterName: test-el-cluster
+    - clusterName: test-el-cluster1
   drain:
     deleteLocalData: true
     force: true
