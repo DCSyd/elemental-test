@@ -35,7 +35,7 @@ spec:
 kind: Cluster
 apiVersion: provisioning.cattle.io/v1
 metadata:
-  name: test-el-cluster-dc
+  name: test-el-cluster-taeho
   namespace: fleet-default
   labels:
     site: test
