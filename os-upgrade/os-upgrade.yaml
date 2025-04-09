@@ -5,7 +5,7 @@ metadata:
   namespace: fleet-default
 spec:
   clusterTargets: 
-    - clusterName: test-el-cluster-dc
+    - clusterName: test-el-cluster-taeho
   drain:
     deleteLocalData: true
     force: true
