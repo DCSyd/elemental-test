@@ -16,13 +16,18 @@ spec:
   ipAddressPools:
   -  pool1
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-app
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     workload.user.cattle.io/workloadselector: apps.deployment-default-demo-app
   name: demo-app
-  namespace: default
+  namespace: demo-app
 spec:
   replicas: 2
   selector:
@@ -32,7 +37,7 @@ spec:
     metadata:
       labels:
         workload.user.cattle.io/workloadselector: apps.deployment-default-demo-app
-      namespace: default
+      namespace: demo-app
     spec:
       containers:
         - image: nginx
@@ -87,7 +92,7 @@ metadata:
   annotations:
     field.cattle.io/targetWorkloadIds: '["default/demo-app"]'
   name: demo-app
-  namespace: default
+  namespace: demo-app
 spec:
   internalTrafficPolicy: Cluster
   ipFamilies:
