@@ -1,0 +1,7 @@
+defaultNamespace: cert-manager
+helm:
+  chart: oci://dp.apps.rancher.io/charts/cert-manager
+  releaseName: cert-manager
+  values:
+    crds:
+      enabled: true
