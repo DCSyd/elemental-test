@@ -1,0 +1,6 @@
+defaultNamespace: opencost
+helm:
+  chart: oci://dp.apps.rancher.io/charts/opencost
+  releaseName: opencost
+  valuesFiles:
+    - values.yaml
