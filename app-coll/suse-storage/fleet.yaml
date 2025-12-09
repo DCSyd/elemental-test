@@ -1,0 +1,26 @@
+defaultNamespace: suse-storage
+helm:
+  chart: oci://dp.apps.rancher.io/charts/suse-storage
+  releaseName: suse-storage
+  values:
+      csi:
+        attacherReplicaCount: 1
+        provisionerReplicaCount: 1
+        resizerReplicaCount: 1
+        snapshotterReplicaCount: 1
+      defaultSettings:
+        defaultDataLocality: best-efforts
+        defaultDataPath: /var/lib/rancher/longhorn
+        defaultReplicaCount: 1
+        deletingConfirmationFlag: true
+        replicaAutoBalance: least-effort
+      longhornUI:
+        replicas: 1
+      persistence:
+        backingImage:
+          enable: false
+        backupTargetName: default
+        dataEngine: v1
+        defaultClass: true
+        defaultClassReplicaCount: 1
+        defaultDataLocality: disabled
